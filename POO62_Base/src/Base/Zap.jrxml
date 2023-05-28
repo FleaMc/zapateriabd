@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d4d969be-8407-4e1a-a788-836cc4bb8d26">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Venta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     ventas.`Id_Venta` AS ventas_Id_Venta,
+     ventas.`Id_Dependiente` AS ventas_Id_Dependiente,
+     ventas.`Id_Zapato` AS ventas_Id_Zapato,
+     ventas.`FechaVenta` AS ventas_FechaVenta,
+     ventas.`Importe` AS ventas_Importe,
+     dependientes.`Id_Dep` AS dependientes_Id_Dep,
+     dependientes.`Nombre` AS dependientes_Nombre
+FROM
+     `dependientes` dependientes INNER JOIN `ventas` ventas ON dependientes.`Id_Dep` = ventas.`Id_Dependiente`
+WHERE
+     ventas.`Id_Dependiente` = $P{Venta}]]>
+	</queryString>
+	<field name="ventas_Id_Venta" class="java.lang.Long"/>
+	<field name="ventas_Id_Dependiente" class="java.lang.Long"/>
+	<field name="ventas_Id_Zapato" class="java.lang.Long"/>
+	<field name="ventas_FechaVenta" class="java.lang.String"/>
+	<field name="ventas_Importe" class="java.lang.Long"/>
+	<field name="dependientes_Id_Dep" class="java.lang.Long"/>
+	<field name="dependientes_Nombre" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="21" y="45" width="100" height="20" uuid="2e8cec0c-377b-4258-a37d-d5d340d5d226"/>
+				<textFieldExpression><![CDATA[$F{ventas_Id_Venta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="142" y="11" width="100" height="20" uuid="71bd0aaf-703d-4f36-ac64-055e11ffd386"/>
+				<text><![CDATA[dependientes_Nombre]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="142" y="45" width="100" height="20" uuid="3a8d7dd6-4e4b-46df-8d56-1853b7fe4ca5"/>
+				<textFieldExpression><![CDATA[$F{dependientes_Nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="284" y="11" width="100" height="20" uuid="1fe06ea2-51c1-4f2e-85a4-0c5c6f6baac5"/>
+				<text><![CDATA[ventas_Id_Zapato]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="284" y="45" width="100" height="20" uuid="ead9628c-de6b-4ff5-9546-3deb65fe907c"/>
+				<textFieldExpression><![CDATA[$F{ventas_Id_Zapato}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="11" width="100" height="20" uuid="f080567a-114e-42e4-9670-afe57518c84d"/>
+				<text><![CDATA[Idventa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="11" width="100" height="20" uuid="5e1ed933-6340-4baf-967f-896662a5a063"/>
+				<text><![CDATA[ventas_Importe]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="420" y="45" width="100" height="20" uuid="e3c036fe-c4d4-47de-8c71-2cacbc525f4a"/>
+				<textFieldExpression><![CDATA[$F{ventas_Importe}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
